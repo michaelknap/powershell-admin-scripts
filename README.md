@@ -11,7 +11,7 @@ This repository contains a collection of PowerShell scripts designed to make adm
 5. [Audit Teams App Policies](#audit-teams-app-policies)
 6. [Audit Teams External Users](#audit-teams-external-users)
 7. [Remove User Mailbox Permission](#remove-user-mailbox-permissions)
-
+8. [Audit User Login Logs](#audit-user-login-events)
 
 ## Remove Emails From All Mailboxes
 
@@ -134,3 +134,25 @@ This script connects to Exchange Online to find and remove specific permissions 
 
  - Exchange Online Management module
  - Admin account with necessary permissions to modify mailbox permissions
+
+
+## Audit User Login Events
+
+### Description
+
+This script, named `AuditUserLogin.ps1`, will fetch logon, logon failure, and account lockout events (Event IDs 4624, 4625, 4740) for a specified user from the Security log of a domain controller. It allows for filtering events based on a specific time frame and can optionally export the results to a CSV file. This is particularly useful for auditing user activities and identifying potential security incidents.
+
+### Usage
+
+To fetch logon events for a user and display them in the console:
+
+```powershell
+.\AuditUserLogin.ps1 -user "user1" -days 5
+```
+To fetch logon events for a user and save them to a CSV file:
+```
+.\AuditUserLogin.ps1 -user "user1" -days 5 -csv
+```
+### Requirements
+- Appropriate permissions to access Security logs on a domain controller.
+- Group Policy settings for audit of logon, lockout events need to be enabled on the domain controller.
